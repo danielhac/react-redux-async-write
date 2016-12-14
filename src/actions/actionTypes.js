@@ -1,0 +1,1 @@
+export const LOAD_WINES_SUCCESS = 'LOAD_WINES_SUCCESS';
