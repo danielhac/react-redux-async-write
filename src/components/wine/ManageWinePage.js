@@ -12,12 +12,38 @@ class ManageWinePage extends React.Component {
             wine: Object.assign({}, props.wine),
             errors: {}
         };
+
+        this.updateWineState = this.updateWineState.bind(this);
+        this.saveWine = this.saveWine.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.wine.id != nextProps.wine.id) {
+            // Necessary to populate form when existing wine is loaded directly (or refresh)
+            this.setState({wine: Object.assign({}, nextProps.wine)});
+        }
+    }
+
+    // Single change handler for all form fields (allows fields to be typed)
+    updateWineState(event) {
+        const field = event.target.name;
+        let wine = this.state.wine;
+        wine[field] = event.target.value;
+        return this.setState({wine: wine});
+    }
+
+    saveWine(event) {
+        event.preventDefault();
+        this.props.actions.saveWine(this.state.wine);
+        this.context.router.push('/wines');
     }
 
     render() {
         return (
             <WineForm
                 allMakers={this.props.makers}
+                onChange={this.updateWineState}
+                onSave={this.saveWine}
                 wine={this.state.wine}
                 errors={this.state.errors}
             />
@@ -27,12 +53,31 @@ class ManageWinePage extends React.Component {
 
 ManageWinePage.propTypes = {
     wine: PropTypes.object.isRequired,
-    makers: PropTypes.array.isRequired
+    makers: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired
 };
 
+//Pull in the React Router context so router is available on this.context.router.
+ManageWinePage.contextTypes = {
+    router: PropTypes.object
+};
+
+function getWineById(wines, id) {
+    const wine = wines.filter(wine => wine.id == id);
+    if (wine.length) return wine[0]; //since filter returns an array, have to grab the first.
+    return null;
+}
+
 function mapStateToProps(state, ownProps) {
-    // Empty course for core wine structure
+    // From the path '/wine/:id'
+    const wineId = ownProps.params.id;
+
+    // Empty wine for core wine structure
     let wine = {id: '', region: '', wineName: '', makerId: '', price: '', category: ''};
+
+    if (wineId && state.wines.length > 0) {
+        wine = getWineById(state.wines, wineId);
+    }
 
     // Translate the shape that came from API into something useful for populating drop-down
     const makersFormattedForDropdown = state.makers.map(maker => {

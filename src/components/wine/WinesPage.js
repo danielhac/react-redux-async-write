@@ -3,15 +3,20 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as wineActions from '../../actions/wineActions';
 import WineList from './WineList';
+import {browserHistory} from 'react-router';
 
 class WinesPage extends React.Component {
     constructor(props, context) {
         super(props, context);
-
+        this.redirectToAddWinePage = this.redirectToAddWinePage.bind(this);
     }
 
     wineRow(wine, index) {
         return <div key={index}>{wine.title}</div>;
+    }
+
+    redirectToAddWinePage() {
+        browserHistory.push('/wine');
     }
 
     render() {
@@ -22,6 +27,10 @@ class WinesPage extends React.Component {
                 <h1>Wines</h1>
                 <p>All about my time with wine</p>
                 <div id="space"></div>
+                <input type="submit"
+                       value="Add Wine"
+                       className="btn btn-primary"
+                       onClick={this.redirectToAddWinePage} />
                 <WineList wines={wines}/>
             </div>
         );
