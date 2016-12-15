@@ -3,7 +3,7 @@ import delay from './delay';
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
 // All calls return promises.
-const authors = [
+const makers = [
     {
         id: 'callaway-coastal',
         wineName: 'Callaway Coastal'
@@ -19,56 +19,56 @@ const authors = [
 ];
 
 //This would be performed on the server in a real app. Just stubbing in.
-const generateId = (author) => {
-    return author.wineName;
+const generateId = (maker) => {
+    return maker.wineName;
 };
 
-class AuthorApi {
-    static getAllAuthors() {
+class MakerApi {
+    static getAllMakers() {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve(Object.assign([], authors));
+                resolve(Object.assign([], makers));
             }, delay);
         });
     }
 
-    static saveAuthor(author) {
-        author = Object.assign({}, author); // to avoid manipulating object passed in.
+    static saveMaker(maker) {
+        maker = Object.assign({}, maker); // to avoid manipulating object passed in.
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 // Simulate server-side validation
                 const minWineNameLength = 3;
-                if (author.wineName.length < minWineNameLength) {
-                    reject(`First Name must be at least ${minWineNameLength} characters.`);
+                if (maker.wineName.length < minWineNameLength) {
+                    reject(`Wine name must be at least ${minWineNameLength} characters.`);
                 }
 
-                if (author.id) {
-                    const existingAuthorIndex = authors.findIndex(a => a.id == author.id);
-                    authors.splice(existingAuthorIndex, 1, author);
+                if (maker.id) {
+                    const existingMakerIndex = makers.findIndex(a => a.id == maker.id);
+                    makers.splice(existingMakerIndex, 1, maker);
                 } else {
                     //Just simulating creation here.
-                    //The server would generate ids for new authors in a real app.
+                    //The server would generate ids for new makers in a real app.
                     //Cloning so copy returned is passed by value rather than by reference.
-                    author.id = generateId(author);
-                    authors.push(author);
+                    maker.id = generateId(maker);
+                    makers.push(maker);
                 }
 
-                resolve(author);
+                resolve(maker);
             }, delay);
         });
     }
 
-    static deleteAuthor(authorId) {
+    static deleteMaker(makerId) {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                const indexOfAuthorToDelete = authors.findIndex(author => {
-                    author.id == authorId;
+                const indexOfMakerToDelete = makers.findIndex(maker => {
+                    maker.id == makerId;
                 });
-                authors.splice(indexOfAuthorToDelete, 1);
+                makers.splice(indexOfMakerToDelete, 1);
                 resolve();
             }, delay);
         });
     }
 }
 
-export default AuthorApi;
+export default MakerApi;
