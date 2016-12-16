@@ -24,6 +24,13 @@ const WineForm = ({wine, allMakers, onSave, onChange, saving, errors}) => {
                 onChange={onChange} error={errors.makerId}/>
 
             <TextInput
+                name="region"
+                label="Region"
+                value={wine.region}
+                onChange={onChange}
+                error={errors.region}/>
+
+            <TextInput
                 name="category"
                 label="Category"
                 value={wine.category}

@@ -6,7 +6,7 @@ const WineListRow = ({wine}) => {
         <tr>
             <td><Link to={'/wine/' + wine.id}>{wine.wineName}</Link></td>
             <td>{wine.region}</td>
-            <td>{wine.brand}</td>
+            <td>{wine.makerId}</td>
             <td>{wine.category}</td>
             <td>{wine.price}</td>
         </tr>

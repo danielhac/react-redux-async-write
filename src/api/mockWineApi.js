@@ -8,7 +8,7 @@ const wines = [
         id: "callaway-coastal-old-vine-zinfandel",
         wineName: "Callaway Coastal Old Vine Zinfandel",
         region: "California",
-        brand: "callaway-coastal",
+        makerId: "callaway-coastal",
         price: "9.95",
         category: "Red"
     },
@@ -16,7 +16,7 @@ const wines = [
         id: "callaway-coastal-vita-prosecco",
         wineName: "Callaway Coastal Vita Prosecco",
         region: "Italy",
-        brand: "callaway-coastal",
+        makerId: "callaway-coastal",
         price: "16.95",
         category: "White"
     },
@@ -24,7 +24,7 @@ const wines = [
         id: "challis-lane-merlot",
         wineName: "Challis Lane Merlot",
         region: "Spain",
-        brand: "challis-lane",
+        makerId: "challis-lane",
         price: "14.95",
         category: "Red"
     },
@@ -32,7 +32,7 @@ const wines = [
         id: "challis-lane-chardonnay",
         wineName: "Challis Lane Chardonnay",
         region: "California",
-        brand: "challis-lane",
+        makerId: "challis-lane",
         price: "9.95",
         category: "White"
     },
@@ -40,7 +40,7 @@ const wines = [
         id: "fog-head-sauvignon",
         wineName: "Fog Head Sauvignon",
         region: "France",
-        brand: "fog-head",
+        makerId: "fog-head",
         price: "12.95",
         category: "White"
     }

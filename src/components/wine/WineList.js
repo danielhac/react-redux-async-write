@@ -8,7 +8,7 @@ const WineList = ({wines}) => {
             <tr>
                 <th>Wine Name</th>
                 <th>Region</th>
-                <th>Brand</th>
+                <th>Maker</th>
                 <th>Category</th>
                 <th>Price</th>
             </tr>
