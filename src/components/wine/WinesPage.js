@@ -11,10 +11,6 @@ class WinesPage extends React.Component {
         this.redirectToAddWinePage = this.redirectToAddWinePage.bind(this);
     }
 
-    wineRow(wine, index) {
-        return <div key={index}>{wine.title}</div>;
-    }
-
     redirectToAddWinePage() {
         browserHistory.push('/wine');
     }
